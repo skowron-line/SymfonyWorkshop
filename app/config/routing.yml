@@ -1,0 +1,4 @@
+product:
+    resource: "@ProductBundle/Resources/config/routing.xml"
+    prefix:   /
+
