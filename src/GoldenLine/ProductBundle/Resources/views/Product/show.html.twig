@@ -23,6 +23,9 @@
         </div>
         <div class="col-md-2">
             <div class="pull-right">
+                <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-edit"></span> Zmień
+                </a>
                 <a href="{{ path('product_delete', {'id': product.id}) }}" class="btn btn-danger">
                     <span class="glyphicon glyphicon-trash"></span> Usuń
                 </a>

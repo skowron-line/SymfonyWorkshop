@@ -12,7 +12,6 @@
             <constraint name="NotBlank"/>
         </property>
         <property name="file">
-            <constraint name="NotBlank"/>
             <constraint name="Image">
                 <option name="allowLandscape">false</option>
                 <option name="allowPortrait">false</option>

@@ -2,6 +2,7 @@
 
 namespace GoldenLine\ProductBundle\Tests\Controller;
 
+use GoldenLine\ProductBundle\Model\ProductQuery;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -33,13 +34,41 @@ class ProductControllerTest extends WebTestCase
 
     /**
      * @test
+     * @depends testCreate
      */
     public function show()
     {
         $client  = static::createClient();
-        $crawler = $client->request('GET', '/produkt/pokaz');
+        $product = ProductQuery::create()->findOne();
+        $crawler = $client->request('GET', '/produkt/pokaz/' . $product->getId());
 
-        $this->assertTrue($crawler->filter('html:contains("Produkty")')->count() > 0);
         $this->assertGreaterThan(0, $crawler->filter('h1')->count());
+    }
+
+    /**
+     * @depends testCreate
+     */
+    public function testEdit()
+    {
+        $client  = static::createClient();
+        $product = ProductQuery::create()->findOne();
+        $crawler = $client->request('GET', '/produkt/edytuj/' . $product->getId());
+
+        $this->assertTrue($crawler->filter('html:contains("Edytuj produkt")')->count() > 0);
+        $this->assertGreaterThan(0, $crawler->filter('h1')->count());
+
+        $form = $crawler->selectButton('product_save')->form();
+
+        $form['product[name]']  = 'Coca Cola Light';
+        $form['product[price]'] = '12,34';
+
+        $client->submit($form);
+
+        $this->assertTrue($client->getResponse()->isRedirect('/produkt/pokaz/' . $product->getId()));
+
+        $product = ProductQuery::create()->findOne();
+
+        $this->assertEquals('Coca Cola Light', $product->getName());
+        $this->assertEquals(12.34, $product->getPrice());
     }
 }

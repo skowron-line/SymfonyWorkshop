@@ -18,4 +18,9 @@
         <requirement key="id">\d+</requirement>
     </route>
 
+    <route id="product_edit" pattern="/edytuj/{id}">
+        <default key="_controller">ProductBundle:Product:edit</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+
 </routes>
