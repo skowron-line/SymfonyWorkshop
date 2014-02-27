@@ -8,8 +8,9 @@
         <default key="_controller">ProductBundle:Product:create</default>
     </route>
 
-    <route id="product_show" pattern="/pokaz">
+    <route id="product_show" pattern="/pokaz/{id}">
         <default key="_controller">ProductBundle:Product:show</default>
+        <requirement key="id">\d+</requirement>
     </route>
 
 </routes>
