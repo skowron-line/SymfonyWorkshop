@@ -7,7 +7,7 @@
                 required="true"/>
         <column name="name" phpName="Name" type="VARCHAR" size="32" required="true" defaultValue=""/>
         <column name="price" phpName="Price" type="DOUBLE" size="10" scale="2" required="true"/>
-        <column name="photo" phpName="Photo" type="VARCHAR" size="32" required="true" defaultValue=""/>
+        <column name="photo" phpName="Photo" type="VARCHAR" size="255" required="true" defaultValue=""/>
         <vendor type="mysql">
             <parameter name="Engine" value="InnoDB"/>
         </vendor>
