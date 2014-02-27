@@ -34,4 +34,11 @@ class ProductController extends Controller
     {
         return $this->render('ProductBundle:Product:show.html.twig', array('product' => $product));
     }
+
+    public function deleteAction(Product $product)
+    {
+        $product->delete();
+
+        return $this->redirect($this->generateUrl('product_create'));
+    }
 }

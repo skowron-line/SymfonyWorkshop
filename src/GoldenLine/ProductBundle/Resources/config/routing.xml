@@ -13,4 +13,9 @@
         <requirement key="id">\d+</requirement>
     </route>
 
+    <route id="product_delete" pattern="/usun/{id}">
+        <default key="_controller">ProductBundle:Product:delete</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+
 </routes>

@@ -9,7 +9,7 @@
                 <img src="{{ asset(product.getWebPath()) }}" alt="{{ product.name }}"/>
             </a>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
             <dl>
                 <dt>Nazwa</dt>
                 <dd>{{ product.name }}</dd>
@@ -21,5 +21,23 @@
                 <dd>{{ asset(product.getWebPath()) }}</dd>
             </dl>
         </div>
+        <div class="col-md-2">
+            <div class="pull-right">
+                <a href="{{ path('product_delete', {'id': product.id}) }}" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash"></span> Usuń
+                </a>
+            </div>
+        </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('a.btn-danger').click(function () {
+                return confirm('Na pewno?');
+            });
+        });
+    </script>
 {% endblock %}
