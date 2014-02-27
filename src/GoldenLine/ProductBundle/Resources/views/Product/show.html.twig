@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1 class="page-header">Produkty</h1>
+
+    {% for product in products %}
+        <div class="row">
+            <div class="col-md-4">
+                <a class="thumbnail">
+                    <img src="{{ asset(product.getWebPath()) }}" alt="{{ product.name }}"/>
+                </a>
+            </div>
+            <div class="col-md-8">
+                <h2>
+                    {{ product.name }}
+                    <small>{{ product.price | number_format(2, ',', ' ') }} zł</small>
+                </h2>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

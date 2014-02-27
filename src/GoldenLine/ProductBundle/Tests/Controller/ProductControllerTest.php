@@ -30,4 +30,16 @@ class ProductControllerTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isRedirection());
     }
+
+    /**
+     * @test
+     */
+    public function show()
+    {
+        $client  = static::createClient();
+        $crawler = $client->request('GET', '/produkt/pokaz');
+
+        $this->assertTrue($crawler->filter('html:contains("Produkty")')->count() > 0);
+        $this->assertGreaterThan(0, $crawler->filter('h1')->count());
+    }
 }

@@ -8,4 +8,8 @@
         <default key="_controller">ProductBundle:Product:create</default>
     </route>
 
+    <route id="product_show" pattern="/pokaz">
+        <default key="_controller">ProductBundle:Product:show</default>
+    </route>
+
 </routes>

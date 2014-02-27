@@ -6,6 +6,7 @@ use GoldenLine\ProductBundle\Form\Type\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use GoldenLine\ProductBundle\Model\Product;
 use Symfony\Component\HttpFoundation\Request;
+use GoldenLine\ProductBundle\Model\ProductQuery;
 
 class ProductController extends Controller
 {
@@ -28,5 +29,12 @@ class ProductController extends Controller
                 'form' => $form->createView(),
             )
         );
+    }
+
+    public function showAction()
+    {
+        $products = ProductQuery::create()->find();
+
+        return $this->render('ProductBundle:Product:show.html.twig', array('products' => $products));
     }
 }
