@@ -1,4 +1,14 @@
 product:
-    resource: "@ProductBundle/Resources/config/routing.xml"
+    resource: "@ProductBundle/Resources/config/routing_product.xml"
     prefix:   /produkt
 
+products:
+    resource: "@ProductBundle/Resources/config/routing_products.xml"
+    prefix:   /produkty
+
+root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: products_list
+        permanent: true
