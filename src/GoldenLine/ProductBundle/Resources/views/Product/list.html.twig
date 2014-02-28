@@ -24,7 +24,7 @@
                 <dt>Aktualny stan:</dt>
                 <dd>{{ product.amount }}</dd>
                 <dt></dt>
-                <dd><a href="{{ path('product_buy', {id: product.id}) }}"><button class="btn btn-primary btn-xs">Kup</button></a></dd>
+                <dd><a href="{{ path('product_buy', {id: product.id}) }}"><button class="btn btn-primary btn-xs{% if product.amount == 0 %} disabled{% endif %}">Kup</button></a></dd>
             </dl>
 
         </div>
