@@ -1,3 +1,7 @@
+login:
+    resource: "@UserBundle/Resources/config/routing/login.xml"
+    prefix:   /
+
 transferuj:
     resource: "@TransferujBundle/Resources/config/routing.xml"
     prefix:   /

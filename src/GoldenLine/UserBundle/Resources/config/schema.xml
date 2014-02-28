@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="default" namespace="GoldenLine\UserBundle\Model" defaultIdMethod="native" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd">
+    <table name="user" phpName="User" idMethod="native">
+        <column name="id" phpName="Id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+        <column name="email" phpName="Email" type="VARCHAR" size="255" required="true"/>
+        <unique name="email_is_unique">
+            <unique-column name="email"/>
+        </unique>
+        <behavior name="timestampable" />
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+            <parameter name="Charset" value="utf8"/>
+            <parameter name="Collate" value="utf8_general_ci"/>
+        </vendor>
+    </table>
+</database>
