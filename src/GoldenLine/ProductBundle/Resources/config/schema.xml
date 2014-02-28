@@ -8,6 +8,7 @@
         <column name="name" phpName="Name" type="VARCHAR" size="32" required="true" defaultValue=""/>
         <column name="price" phpName="Price" type="DOUBLE" size="10" scale="2" required="true"/>
         <column name="photo" phpName="Photo" type="VARCHAR" size="255" required="true" defaultValue=""/>
+        <column name="amount" phpName="Amount" type="INTEGER" required="true" defaultValue="0"/>
         <vendor type="mysql">
             <parameter name="Engine" value="InnoDB"/>
         </vendor>
