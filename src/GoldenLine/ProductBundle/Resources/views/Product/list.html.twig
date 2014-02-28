@@ -2,31 +2,35 @@
 
 {% block body %}
     <h1 class="page-header">Lista produktów</h1>
-    <div class="row">
 
-        {% for product in products %}
-            <div class="col-md-6">
-                <div class="col-md-4">
-                    <a class="thumbnail">
-                        <img src="{{ asset(product.getWebPath()) }}" alt="{{ product.name }}"/>
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <dl>
-                        <dt>Nazwa</dt>
-                        <dd>{{ product.name }}</dd>
+    {% for product in products %}
+        {% if loop.index % 2 == 0 %}
+            <div class="row">
+        {% endif %}
 
-                        <dt>Cena</dt>
-                        <dd>{{ product.price | number_format(2, ',', ' ') }} zł</dd>
+        <div class="col-md-2">
+            <a class="thumbnail">
+                <img src="{{ asset(product.getWebPath()) }}" alt="{{ product.name }}"/>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <dl>
+                <dt>Nazwa</dt>
+                <dd>{{ product.name }}</dd>
 
-                        <dt>Aktualny stan:</dt>
-                        <dd>{{ product.amount }}</dd>
+                <dt>Cena</dt>
+                <dd>{{ product.price | number_format(2, ',', ' ') }} zł</dd>
 
-                    </dl>
-                </div>
+                <dt>Aktualny stan:</dt>
+                <dd>{{ product.amount }}</dd>
+
+            </dl>
+        </div>
+        {% if loop.index % 2 == 0 %}
             </div>
-        {% endfor %}
-    </div>
+        {% endif %}
+
+    {% endfor %}
 
 
 {% endblock %}
