@@ -68,7 +68,7 @@ class ProductController extends Controller
         $products = ProductQuery::create()->find();
 
         return $this->render(
-            'ProductBundle:product:list.html.twig',
+            'ProductBundle:Product:list.html.twig',
             array(
                 'products' => $products,
             )
