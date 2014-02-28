@@ -74,4 +74,14 @@ class ProductController extends Controller
             )
         );
     }
+
+    public function buyAction(Product $product)
+    {
+        $amount = $product->getAmount();
+        $amount -= 1;
+        $product->setAmount($amount);
+        $product->save();
+
+        return $this->redirect($this->generateUrl('products_list'));
+    }
 }
