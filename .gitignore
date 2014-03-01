@@ -10,3 +10,7 @@
 /bin/
 /composer.phar
 /.idea/
+/app/propel/
+src/*/*/Model/om/*
+src/*/*/Model/map/*
+/web/uploads/photos/

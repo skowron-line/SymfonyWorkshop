@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" namespace="GoldenLine\ProductBundle\Model"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd">
+    <table name="product" phpName="Product" idMethod="native">
+        <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true"
+                required="true"/>
+        <column name="name" phpName="Name" type="VARCHAR" size="32" required="true" defaultValue=""/>
+        <column name="price" phpName="Price" type="DOUBLE" size="10" scale="2" required="true"/>
+        <column name="photo" phpName="Photo" type="VARCHAR" size="255" required="true" defaultValue=""/>
+        <vendor type="mysql">
+            <parameter name="Engine" value="InnoDB"/>
+        </vendor>
+    </table>
+</database>
