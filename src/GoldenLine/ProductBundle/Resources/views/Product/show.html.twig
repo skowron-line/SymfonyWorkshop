@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1 class="page-header">{{ product.name }}</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <a class="thumbnail">
+                <img src="{{ asset(product.getWebPath()) }}" alt="{{ product.name }}"/>
+            </a>
+        </div>
+        <div class="col-md-8">
+            <dl>
+                <dt>Nazwa</dt>
+                <dd>{{ product.name }}</dd>
+
+                <dt>Cena</dt>
+                <dd>{{ product.price | number_format(2, ',', ' ') }} zł</dd>
+
+                <dt>Zdjęcie</dt>
+                <dd>{{ asset(product.getWebPath()) }}</dd>
+            </dl>
+        </div>
+    </div>
+{% endblock %}

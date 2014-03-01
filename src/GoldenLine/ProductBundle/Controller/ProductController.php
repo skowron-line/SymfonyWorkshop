@@ -19,7 +19,7 @@ class ProductController extends Controller
         if ($form->isValid()) {
             $product->save();
 
-            return $this->redirect($this->generateUrl('product_create'));
+            return $this->redirect($this->generateUrl('product_show', array('id' => $product->getId())));
         }
 
         return $this->render(
@@ -28,5 +28,10 @@ class ProductController extends Controller
                 'form' => $form->createView(),
             )
         );
+    }
+
+    public function showAction(Product $product)
+    {
+        return $this->render('ProductBundle:Product:show.html.twig', array('product' => $product));
     }
 }
