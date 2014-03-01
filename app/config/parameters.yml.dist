@@ -16,3 +16,9 @@ parameters:
 
     transferuj_id:      ~
     transferuj_secret:  ~
+
+    goldenline_client_id:     ~
+    goldenline_client_secret: ~
+
+    facebook_client_id:       ~
+    facebook_client_secret:   ~

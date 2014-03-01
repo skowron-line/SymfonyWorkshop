@@ -1,0 +1,9 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <a href="{{ hwi_oauth_authorization_url('goldenline') }}"><img src="{{ asset('/images/goldenline.png') }}" /> GoldenLine</a>
+
+    <a href="{{ hwi_oauth_authorization_url('facebook') }}"><img src="{{ asset('/images/facebook.png') }}" /> Facebook</a>
+
+{% endblock %}

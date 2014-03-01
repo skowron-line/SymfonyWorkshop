@@ -64,3 +64,32 @@ swiftmailer:
 transferuj:
     id: %transferuj_id%
     secret: %transferuj_secret%
+
+# OAuth2
+hwi_oauth:
+    http_client:
+        timeout:       10 # Time in seconds, after library will shutdown request, by default: 5
+        verify_peer:   false # Setting allowing you to turn off SSL verification, by default: true
+        ignore_errors: false # Setting allowing you to easier debug request errors, by default: true
+        max_redirects: 1 # Number of HTTP redirection request after which library will shutdown request,
+    firewall_name: main
+    resource_owners:
+        facebook:
+            type:          facebook
+            client_id:     %facebook_client_id%
+            client_secret: %facebook_client_secret%
+            scope:         "email"
+        goldenline:
+            type:                oauth2
+            client_id:           %goldenline_client_id%
+            client_secret:       %goldenline_client_secret%
+            access_token_url:    https://www.goldenline.pl/oauth/v2/token
+            authorization_url:   https://www.goldenline.pl/oauth/v2/auth
+            infos_url:           https://www.goldenline.pl/api/me
+            scope:               "email"
+            user_response_class: HWI\Bundle\OAuthBundle\OAuth\Response\PathUserResponse
+            paths:
+                identifier: id
+                nickname:   name
+                realname:   surname
+                email:      email
