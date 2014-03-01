@@ -53,6 +53,10 @@ class Product extends BaseProduct
      */
     public function preSave(\PropelPDO $con = null)
     {
+        if (null === $this->getFile()) {
+            return true;
+        }
+
         $this->getFile()->move(
             $this->getUploadRootDir(),
             $this->getFile()->getClientOriginalName()

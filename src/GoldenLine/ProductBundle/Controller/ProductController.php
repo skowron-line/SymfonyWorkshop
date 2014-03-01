@@ -41,4 +41,24 @@ class ProductController extends Controller
 
         return $this->redirect($this->generateUrl('product_create'));
     }
+
+    public function editAction(Request $request, Product $product)
+    {
+        $form = $this->createForm(new ProductType(), $product);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $product->save();
+
+            return $this->redirect($this->generateUrl('product_show', array('id' => $product->getId())));
+        }
+
+        return $this->render(
+            'ProductBundle:Product:edit.html.twig',
+            array(
+                'form' => $form->createView(),
+            )
+        );
+    }
 }
