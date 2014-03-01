@@ -1,3 +1,7 @@
+transferuj:
+    resource: "@TransferujBundle/Resources/config/routing.xml"
+    prefix:   /
+
 product:
     resource: "@ProductBundle/Resources/config/routing_product.xml"
     prefix:   /produkt

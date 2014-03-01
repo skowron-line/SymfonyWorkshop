@@ -23,9 +23,18 @@
         <requirement key="id">\d+</requirement>
     </route>
 
-    <route id="product_buy" pattern="/{id}/kup">
+    <route id="product_pay" pattern="/{id}/zaplac">
         <default key="_controller">ProductBundle:Product:buy</default>
         <requirement key="id">\d+</requirement>
+    </route>
+
+    <route id="product_success" pattern="/pokwitowanie/{id}/powodzenie">
+        <default key="_controller">ProductBundle:Product:success</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+
+    <route id="product_failure" pattern="/pokwitowanie/niepowodzenie">
+        <default key="_controller">ProductBundle:Product:failure</default>
     </route>
 
 </routes>

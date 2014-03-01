@@ -6,7 +6,9 @@ use GoldenLine\ProductBundle\Form\Type\ProductType;
 use GoldenLine\ProductBundle\Model\ProductQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use GoldenLine\ProductBundle\Model\Product;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ProductController extends Controller
 {
@@ -77,10 +79,52 @@ class ProductController extends Controller
 
     public function buyAction(Product $product)
     {
-        $amount = $product->getAmount();
-        $amount -= 1;
-        $product->setAmount($amount);
-        $product->save();
+        $params = array(
+            'id'           => $this->container->getParameter('transferuj_id'),
+            'kwota'        => $product->getPrice(),
+            'opis'         => $product->getName(),
+            'crc'          => $product->getId(),
+            'pow_url'      => $this->generateUrl(
+                    'product_success',
+                    array('id' => $product->getId()),
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                ),
+            'pow_url_blad' => $this->generateUrl(
+                    'product_failure',
+                    array(),
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                ),
+        );
+
+        /** @var Router $router */
+        $router = $this->get('router');
+        $router
+            ->getContext()
+            ->setBaseUrl('');
+
+        return $this->redirect($router->generate('transferuj_gateway', $params));
+    }
+
+    public function successAction(Product $product)
+    {
+        $product
+            ->setAmount($product->getAmount() - 1)
+            ->save();
+
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            'Dziękujemy za zakup!'
+        );
+
+        return $this->redirect($this->generateUrl('products_list'));
+    }
+
+    public function failureAction()
+    {
+        $this->get('session')->getFlashBag()->add(
+            'error',
+            'Zakup nie powiódł się!'
+        );
 
         return $this->redirect($this->generateUrl('products_list'));
     }

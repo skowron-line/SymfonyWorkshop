@@ -18,10 +18,10 @@ class ProductControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('product_save')->form();
 
-        $form['product[name]']  = 'Coca Cola';
-        $form['product[price]'] = '1,23';
+        $form['product[name]']   = 'Coca Cola';
+        $form['product[price]']  = '1,23';
         $form['product[amount]'] = '5';
-        $form['product[file]']  = new UploadedFile(
+        $form['product[file]']   = new UploadedFile(
             __DIR__ . '/../Resources/public/image/photo.jpg',
             'photo.jpg',
             'image/jpeg',
@@ -60,7 +60,7 @@ class ProductControllerTest extends WebTestCase
 
         $this->assertGreaterThan(0, $crawler->filter('h1')->count());
 
-        $this->assertEquals('Lista produktów' ,$crawler->filter('h1')->text());
+        $this->assertEquals('Lista produktów', $crawler->filter('h1')->text());
     }
 
     /**
@@ -69,14 +69,31 @@ class ProductControllerTest extends WebTestCase
      */
     public function buyProduct()
     {
-        $product   = ProductQuery::create()->findOne();
-        $oldAmount = $product->getAmount();
-
-        $client = static::createClient();
-        $uri    = sprintf('/produkt/%s/kup', $product->getId());
+        $product = ProductQuery::create()->findOne();
+        $client  = static::createClient();
+        $uri     = sprintf('/produkt/%s/zaplac', $product->getId());
         $client->request('GET', $uri);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue(
+            $client->getResponse()->isRedirect(
+                'https://secure.transferuj.pl/?id=12866&kwota=12.34&opis=Coca+Cola+Light&crc=1&pow_url=http%3A%2F%2Flocalhost%2Fprodukt%2Fpokwitowanie%2F1%2Fpowodzenie&pow_url_blad=http%3A%2F%2Flocalhost%2Fprodukt%2Fpokwitowanie%2Fniepowodzenie'
+            )
+        );
+    }
+
+    /**
+     * @depends buyProduct
+     */
+    public function testSuccess()
+    {
+        $product   = ProductQuery::create()->findOne();
+        $oldAmount = $product->getAmount();
+        $client    = static::createClient();
+        $uri       = sprintf('/produkt/pokwitowanie/%d/powodzenie', $product->getId());
+        $client->request('GET', $uri);
+        $client->followRedirect();
+
+        $this->assertTrue($client->getResponse()->isOk());
 
         $productAfterRequest = ProductQuery::create()->findOneById($product->getId());
 
@@ -97,8 +114,8 @@ class ProductControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('product_save')->form();
 
-        $form['product[name]']  = 'Coca Cola Light';
-        $form['product[price]'] = '12,34';
+        $form['product[name]']   = 'Coca Cola Light';
+        $form['product[price]']  = '12,34';
         $form['product[amount]'] = '8';
 
         $client->submit($form);

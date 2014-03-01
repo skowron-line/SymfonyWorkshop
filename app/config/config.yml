@@ -59,3 +59,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# Transferuj
+transferuj:
+    id: %transferuj_id%
+    secret: %transferuj_secret%

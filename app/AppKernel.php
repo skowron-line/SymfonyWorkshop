@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Propel\PropelBundle\PropelBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new GoldenLine\ProductBundle\ProductBundle(),
+            new GoldenLine\TransferujBundle\TransferujBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
