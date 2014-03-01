@@ -3,6 +3,7 @@
 namespace GoldenLine\ProductBundle\Controller;
 
 use GoldenLine\ProductBundle\Form\Type\ProductType;
+use GoldenLine\ProductBundle\Model\ProductQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use GoldenLine\ProductBundle\Model\Product;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +59,18 @@ class ProductController extends Controller
             'ProductBundle:Product:edit.html.twig',
             array(
                 'form' => $form->createView(),
+            )
+        );
+    }
+
+    public function listAction()
+    {
+        $products = ProductQuery::create()->find();
+
+        return $this->render(
+            'ProductBundle:Product:list.html.twig',
+            array(
+                'products' => $products,
             )
         );
     }

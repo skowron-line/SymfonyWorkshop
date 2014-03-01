@@ -47,6 +47,23 @@ class ProductControllerTest extends WebTestCase
     }
 
     /**
+     * @test
+     * @depends testCreate
+     */
+    public function listProducts()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/produkty/lista');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertGreaterThan(0, $crawler->filter('h1')->count());
+
+        $this->assertEquals('Lista produktów' ,$crawler->filter('h1')->text());
+    }
+
+    /**
      * @depends testCreate
      */
     public function testEdit()
