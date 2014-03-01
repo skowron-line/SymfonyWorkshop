@@ -23,4 +23,9 @@
         <requirement key="id">\d+</requirement>
     </route>
 
+    <route id="product_buy" pattern="/{id}/kup">
+        <default key="_controller">ProductBundle:Product:buy</default>
+        <requirement key="id">\d+</requirement>
+    </route>
+
 </routes>

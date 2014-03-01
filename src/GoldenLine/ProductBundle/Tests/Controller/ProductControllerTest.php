@@ -64,6 +64,26 @@ class ProductControllerTest extends WebTestCase
     }
 
     /**
+     * @test
+     * @depends testCreate
+     */
+    public function buyProduct()
+    {
+        $product   = ProductQuery::create()->findOne();
+        $oldAmount = $product->getAmount();
+
+        $client = static::createClient();
+        $uri    = sprintf('/produkt/%s/kup', $product->getId());
+        $client->request('GET', $uri);
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+        $productAfterRequest = ProductQuery::create()->findOneById($product->getId());
+
+        $this->assertEquals($oldAmount - 1, $productAfterRequest->getAmount());
+    }
+
+    /**
      * @depends testCreate
      */
     public function testEdit()
