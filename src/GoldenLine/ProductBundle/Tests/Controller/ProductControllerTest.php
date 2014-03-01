@@ -20,6 +20,7 @@ class ProductControllerTest extends WebTestCase
 
         $form['product[name]']  = 'Coca Cola';
         $form['product[price]'] = '1,23';
+        $form['product[amount]'] = '5';
         $form['product[file]']  = new UploadedFile(
             __DIR__ . '/../Resources/public/image/photo.jpg',
             'photo.jpg',
@@ -61,6 +62,7 @@ class ProductControllerTest extends WebTestCase
 
         $form['product[name]']  = 'Coca Cola Light';
         $form['product[price]'] = '12,34';
+        $form['product[amount]'] = '8';
 
         $client->submit($form);
 
@@ -70,5 +72,6 @@ class ProductControllerTest extends WebTestCase
 
         $this->assertEquals('Coca Cola Light', $product->getName());
         $this->assertEquals(12.34, $product->getPrice());
+        $this->assertEquals(8, $product->getAmount());
     }
 }
